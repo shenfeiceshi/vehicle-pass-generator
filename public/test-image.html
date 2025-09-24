@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片加载测试</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .test-image {
+            max-width: 100%;
+            height: auto;
+            border: 2px solid #007bff;
+            margin: 10px 0;
+        }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        .success { background-color: #d4edda; color: #155724; }
+        .error { background-color: #f8d7da; color: #721c24; }
+        .info { background-color: #d1ecf1; color: #0c5460; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>车辆通行证图片加载测试</h1>
+        
+        <div class="test-section">
+            <h2>测试1: 直接图片标签加载</h2>
+            <div id="test1-status" class="status info">正在测试...</div>
+            <img id="test1-img" class="test-image" alt="车辆通行证模板">
+        </div>
+        
+        <div class="test-section">
+            <h2>测试2: JavaScript Image对象加载</h2>
+            <div id="test2-status" class="status info">正在测试...</div>
+            <canvas id="test2-canvas" width="400" height="300" style="border: 1px solid #ccc;"></canvas>
+        </div>
+        
+        <div class="test-section">
+            <h2>测试3: 带时间戳的图片加载</h2>
+            <div id="test3-status" class="status info">正在测试...</div>
+            <img id="test3-img" class="test-image" alt="车辆通行证模板（带时间戳）">
+        </div>
+        
+        <div class="test-section">
+            <h2>环境信息</h2>
+            <div class="status info">
+                <p><strong>当前URL:</strong> <span id="current-url"></span></p>
+                <p><strong>Base路径:</strong> <span id="base-path"></span></p>
+                <p><strong>图片完整路径:</strong> <span id="full-path"></span></p>
+                <p><strong>用户代理:</strong> <span id="user-agent"></span></p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 获取base路径
+        const isProduction = window.location.hostname === 'shenfeiceshi.github.io';
+        const basePath = isProduction ? '/vehicle-pass-generator/' : '/';
+        const imagePath = basePath + 'vehicle-pass-template.jpg';
+        
+        // 显示环境信息
+        document.getElementById('current-url').textContent = window.location.href;
+        document.getElementById('base-path').textContent = basePath;
+        document.getElementById('full-path').textContent = window.location.origin + imagePath;
+        document.getElementById('user-agent').textContent = navigator.userAgent;
+        
+        // 测试1: 直接图片标签加载
+        const test1Img = document.getElementById('test1-img');
+        const test1Status = document.getElementById('test1-status');
+        
+        test1Img.onload = function() {
+            test1Status.className = 'status success';
+            test1Status.textContent = `✅ 图片加载成功！尺寸: ${this.naturalWidth}x${this.naturalHeight}`;
+        };
+        
+        test1Img.onerror = function() {
+            test1Status.className = 'status error';
+            test1Status.textContent = `❌ 图片加载失败！路径: ${this.src}`;
+        };
+        
+        test1Img.src = imagePath;
+        
+        // 测试2: JavaScript Image对象加载
+        const test2Status = document.getElementById('test2-status');
+        const test2Canvas = document.getElementById('test2-canvas');
+        const test2Ctx = test2Canvas.getContext('2d');
+        
+        const test2Img = new Image();
+        test2Img.crossOrigin = 'anonymous';
+        
+        test2Img.onload = function() {
+            test2Status.className = 'status success';
+            test2Status.textContent = `✅ JavaScript Image对象加载成功！尺寸: ${this.width}x${this.height}`;
+            
+            // 绘制到canvas
+            const scale = Math.min(test2Canvas.width / this.width, test2Canvas.height / this.height);
+            const scaledWidth = this.width * scale;
+            const scaledHeight = this.height * scale;
+            const x = (test2Canvas.width - scaledWidth) / 2;
+            const y = (test2Canvas.height - scaledHeight) / 2;
+            
+            test2Ctx.clearRect(0, 0, test2Canvas.width, test2Canvas.height);
+            test2Ctx.drawImage(this, x, y, scaledWidth, scaledHeight);
+        };
+        
+        test2Img.onerror = function(error) {
+            test2Status.className = 'status error';
+            test2Status.textContent = `❌ JavaScript Image对象加载失败！路径: ${this.src}`;
+            console.error('Image load error:', error);
+        };
+        
+        test2Img.src = imagePath;
+        
+        // 测试3: 带时间戳的图片加载
+        const test3Img = document.getElementById('test3-img');
+        const test3Status = document.getElementById('test3-status');
+        const timestampPath = imagePath + '?t=' + Date.now();
+        
+        test3Img.onload = function() {
+            test3Status.className = 'status success';
+            test3Status.textContent = `✅ 带时间戳的图片加载成功！尺寸: ${this.naturalWidth}x${this.naturalHeight}`;
+        };
+        
+        test3Img.onerror = function() {
+            test3Status.className = 'status error';
+            test3Status.textContent = `❌ 带时间戳的图片加载失败！路径: ${this.src}`;
+        };
+        
+        test3Img.src = timestampPath;
+        
+        // 添加控制台日志
+        console.log('=== 图片加载测试 ===');
+        console.log('当前环境:', isProduction ? '生产环境' : '开发环境');
+        console.log('Base路径:', basePath);
+        console.log('图片路径:', imagePath);
+        console.log('完整URL:', window.location.origin + imagePath);
+        console.log('带时间戳路径:', timestampPath);
+    </script>
+</body>
+</html>
