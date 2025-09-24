@@ -52,10 +52,14 @@ export class ImageGenerator {
       }
       
       // 设置底图路径 - 使用public目录中的原始JPG文件
-      const imagePath = '车辆通行证_画板 1.jpg'
+      // 在生产环境中需要添加base路径前缀
+      const basePath = import.meta.env.PROD ? '/vehicle-pass-generator/' : '/'
+      const imagePath = basePath + '车辆通行证_画板 1.jpg'
       img.src = encodeURI(imagePath)
       console.log('设置图片路径:', img.src)
       console.log('加载public目录中的JPG格式底图文件')
+      console.log('当前环境:', import.meta.env.PROD ? '生产环境' : '开发环境')
+      console.log('Base路径:', basePath)
       
       // 添加跨域支持
       img.crossOrigin = 'anonymous'
