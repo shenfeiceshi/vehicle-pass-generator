@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Pages 测试页面</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .status {
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        .info {
+            background-color: #d1ecf1;
+            border: 1px solid #bee5eb;
+            color: #0c5460;
+        }
+        .test-item {
+            margin: 10px 0;
+            padding: 10px;
+            border-left: 4px solid #007bff;
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚗 车辆通行证生成系统 - GitHub Pages 测试</h1>
+        
+        <div class="status">
+            ✅ 如果您能看到这个页面，说明 GitHub Pages 部署基本成功！
+        </div>
+        
+        <div class="info status">
+            📍 当前访问地址: <span id="current-url"></span>
+        </div>
+        
+        <h2>测试项目:</h2>
+        <div class="test-item">
+            <strong>1. 静态资源加载测试</strong><br>
+            CSS 样式: <span id="css-test" style="color: green;">✅ 正常</span>
+        </div>
+        
+        <div class="test-item">
+            <strong>2. JavaScript 执行测试</strong><br>
+            JS 脚本: <span id="js-test">⏳ 检测中...</span>
+        </div>
+        
+        <div class="test-item">
+            <strong>3. 路径配置测试</strong><br>
+            Base 路径: <span id="base-test"></span>
+        </div>
+        
+        <div class="test-item">
+            <strong>4. 图片资源测试</strong><br>
+            <img src="./favicon.svg" alt="图标" style="width: 32px; height: 32px; vertical-align: middle;">
+            <span id="img-test">图标加载测试</span>
+        </div>
+        
+        <h2>下一步操作:</h2>
+        <ol>
+            <li>如果此页面正常显示，说明 GitHub Pages 基础功能正常</li>
+            <li>检查主应用的 React 组件是否有 JavaScript 错误</li>
+            <li>验证 Vite 构建配置是否正确</li>
+            <li>确认所有静态资源路径是否正确</li>
+        </ol>
+        
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="./index.html" style="background: #007bff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">返回主应用</a>
+        </div>
+    </div>
+    
+    <script>
+        // 显示当前 URL
+        document.getElementById('current-url').textContent = window.location.href;
+        
+        // JavaScript 测试
+        document.getElementById('js-test').innerHTML = '<span style="color: green;">✅ 正常</span>';
+        
+        // Base 路径测试
+        const basePath = window.location.pathname.includes('/vehicle-pass-generator/') ? '/vehicle-pass-generator/' : '/';
+        document.getElementById('base-test').innerHTML = `<code>${basePath}</code>`;
+        
+        // 图片加载测试
+        const img = document.querySelector('img');
+        img.onload = function() {
+            document.getElementById('img-test').innerHTML = '<span style="color: green;">✅ 图标加载成功</span>';
+        };
+        img.onerror = function() {
+            document.getElementById('img-test').innerHTML = '<span style="color: red;">❌ 图标加载失败</span>';
+        };
+        
+        console.log('GitHub Pages 测试页面加载完成');
+        console.log('当前路径:', window.location.pathname);
+        console.log('Base 路径:', basePath);
+    </script>
+</body>
+</html>
