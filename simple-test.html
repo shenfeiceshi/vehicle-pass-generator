@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>简单图片测试</title>
+</head>
+<body>
+    <h1>GitHub Pages 图片测试</h1>
+    <button onclick="testImage()">测试图片生成</button>
+    <div id="result"></div>
+    <canvas id="canvas" width="800" height="600" style="border: 1px solid #ccc; display: none;"></canvas>
+    
+    <script>
+        function testImage() {
+            const result = document.getElementById('result');
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            result.innerHTML = '正在测试...';
+            
+            // 检测环境
+            const isGitHubPages = window.location.hostname === 'shenfeiceshi.github.io';
+            const basePath = isGitHubPages ? '/vehicle-pass-generator/' : '/';
+            const imagePath = basePath + '车辆通行证_画板 1.jpg';
+            
+            console.log('环境检测:', {
+                hostname: window.location.hostname,
+                isGitHubPages,
+                basePath,
+                imagePath
+            });
+            
+            const img = new Image();
+            img.crossOrigin = 'anonymous';
+            
+            img.onload = function() {
+                console.log('图片加载成功:', img.width, 'x', img.height);
+                
+                try {
+                    // 绘制图片
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    
+                    // 添加文字
+                    ctx.fillStyle = '#000000';
+                    ctx.font = 'bold 48px Arial';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('京A12345', canvas.width / 2, canvas.height * 0.47);
+                    
+                    // 生成图片
+                    const dataUrl = canvas.toDataURL('image/png');
+                    
+                    if (dataUrl && dataUrl.length > 1000) {
+                        result.innerHTML = '✅ 测试成功！图片可以正常生成。<br>数据长度: ' + dataUrl.length;
+                        canvas.style.display = 'block';
+                        
+                        // 创建下载链接
+                        const link = document.createElement('a');
+                        link.download = 'test-permit.png';
+                        link.href = dataUrl;
+                        link.textContent = '下载测试图片';
+                        result.appendChild(document.createElement('br'));
+                        result.appendChild(link);
+                    } else {
+                        result.innerHTML = '❌ 测试失败：生成的图片数据无效';
+                    }
+                } catch (error) {
+                    result.innerHTML = '❌ 测试失败：' + error.message;
+                    console.error('Canvas操作失败:', error);
+                }
+            };
+            
+            img.onerror = function() {
+                result.innerHTML = '❌ 测试失败：图片加载失败<br>路径: ' + imagePath;
+                console.error('图片加载失败:', imagePath);
+            };
+            
+            img.src = encodeURI(imagePath);
+        }
+    </script>
+</body>
+</html>
