@@ -1,0 +1,196 @@
+<svg width="600" height="800" viewBox="0 0 600 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+    <!-- 橙色渐变背景 -->
+    <linearGradient id="orangeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:#ff8c42;stop-opacity:1" />
+        <stop offset="50%" style="stop-color:#ff7b2e;stop-opacity:1" />
+        <stop offset="100%" style="stop-color:#ff6a1a;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- 菊花花瓣渐变 -->
+    <linearGradient id="petalGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:#ffd700;stop-opacity:1" />
+        <stop offset="30%" style="stop-color:#ffcc00;stop-opacity:1" />
+        <stop offset="70%" style="stop-color:#ff9900;stop-opacity:1" />
+        <stop offset="100%" style="stop-color:#ff6600;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- 蝴蝶渐变 -->
+    <linearGradient id="butterflyGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:#4a90e2;stop-opacity:1" />
+        <stop offset="50%" style="stop-color:#357abd;stop-opacity:1" />
+        <stop offset="100%" style="stop-color:#2c5aa0;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- 白色边框 -->
+    <filter id="whiteOutline">
+        <feMorphology operator="dilate" radius="2"/>
+        <feFlood flood-color="white" flood-opacity="1"/>
+        <feComposite in="SourceGraphic"/>
+    </filter>
+</defs>
+
+<!-- 主背景 -->
+<rect width="600" height="800" fill="url(#orangeGradient)"/>
+
+<!-- 装饰边框 -->
+<rect x="20" y="20" width="560" height="760" fill="none" stroke="white" stroke-width="4" rx="10"/>
+<rect x="30" y="30" width="540" height="740" fill="none" stroke="white" stroke-width="2" rx="8"/>
+
+<!-- 顶部蝴蝶装饰 -->
+<g transform="translate(80, 120)">
+    <!-- 蝴蝶身体 -->
+    <ellipse cx="0" cy="0" rx="2" ry="15" fill="#2c5aa0"/>
+    <!-- 左翅膀 -->
+    <path d="M-2,-8 Q-15,-12 -18,-5 Q-20,0 -15,5 Q-8,8 -2,2 Z" fill="url(#butterflyGradient)"/>
+    <path d="M-2,2 Q-12,8 -15,15 Q-18,20 -10,18 Q-5,15 -2,8 Z" fill="url(#butterflyGradient)"/>
+    <!-- 右翅膀 -->
+    <path d="M2,-8 Q15,-12 18,-5 Q20,0 15,5 Q8,8 2,2 Z" fill="url(#butterflyGradient)"/>
+    <path d="M2,2 Q12,8 15,15 Q18,20 10,18 Q5,15 2,8 Z" fill="url(#butterflyGradient)"/>
+    <!-- 触角 -->
+    <line x1="-3" y1="-15" x2="-8" y2="-20" stroke="#2c5aa0" stroke-width="1"/>
+    <line x1="3" y1="-15" x2="8" y2="-20" stroke="#2c5aa0" stroke-width="1"/>
+    <circle cx="-8" cy="-20" r="1.5" fill="#2c5aa0"/>
+    <circle cx="8" cy="-20" r="1.5" fill="#2c5aa0"/>
+</g>
+
+<!-- 右上角蝴蝶装饰 -->
+<g transform="translate(520, 430)">
+    <!-- 蝴蝶身体 -->
+    <ellipse cx="0" cy="0" rx="2" ry="15" fill="#2c5aa0"/>
+    <!-- 左翅膀 -->
+    <path d="M-2,-8 Q-15,-12 -18,-5 Q-20,0 -15,5 Q-8,8 -2,2 Z" fill="url(#butterflyGradient)"/>
+    <path d="M-2,2 Q-12,8 -15,15 Q-18,20 -10,18 Q-5,15 -2,8 Z" fill="url(#butterflyGradient)"/>
+    <!-- 右翅膀 -->
+    <path d="M2,-8 Q15,-12 18,-5 Q20,0 15,5 Q8,8 2,2 Z" fill="url(#butterflyGradient)"/>
+    <path d="M2,2 Q12,8 15,15 Q18,20 10,18 Q5,15 2,8 Z" fill="url(#butterflyGradient)"/>
+    <!-- 触角 -->
+    <line x1="-3" y1="-15" x2="-8" y2="-20" stroke="#2c5aa0" stroke-width="1"/>
+    <line x1="3" y1="-15" x2="8" y2="-20" stroke="#2c5aa0" stroke-width="1"/>
+    <circle cx="-8" cy="-20" r="1.5" fill="#2c5aa0"/>
+    <circle cx="8" cy="-20" r="1.5" fill="#2c5aa0"/>
+</g>
+
+<!-- 顶部标题区域 -->
+<rect x="200" y="80" width="200" height="40" fill="#4a90e2" rx="5"/>
+<text x="300" y="105" font-family="SimHei, Arial, sans-serif" font-size="20" font-weight="bold" fill="white" text-anchor="middle">2025长安菊展</text>
+
+<!-- 主标题 -->
+<text x="300" y="180" font-family="SimHei, Arial, sans-serif" font-size="48" font-weight="bold" fill="black" text-anchor="middle">车辆通行证</text>
+
+<!-- 车牌号区域 -->
+<rect x="150" y="280" width="300" height="80" fill="rgba(255,255,255,0.8)" stroke="black" stroke-width="3" rx="5"/>
+
+<!-- 底部菊花装饰 -->
+<g transform="translate(300, 650)">
+    <!-- 菊花中心 -->
+    <circle cx="0" cy="0" r="25" fill="#ff6600"/>
+    <circle cx="0" cy="0" r="15" fill="#ffcc00"/>
+    
+    <!-- 菊花花瓣 - 外层 -->
+    <g>
+        <!-- 主要花瓣 -->
+        <ellipse cx="0" cy="-40" rx="8" ry="25" fill="url(#petalGradient)" transform="rotate(0)"/>
+        <ellipse cx="0" cy="-40" rx="8" ry="25" fill="url(#petalGradient)" transform="rotate(15)"/>
+        <ellipse cx="0" cy="-40" rx="8" ry="25" fill="url(#petalGradient)" transform="rotate(30)"/>
+        <ellipse cx="0" cy="-40" rx="8" ry="25" fill="url(#petalGradient)" transform="rotate(45)"/>
+        <ellipse cx="0" cy="-40" rx="8" ry="25" fill="url(#petalGradient)" transform="rotate(60)"/>
+        <ellipse cx="0" cy="-40" rx="8" ry="25" fill="url(#petalGradient)" transform="rotate(75)"/>
+        <ellipse cx="0" cy="-40" rx="8" ry="25" fill="url(#petalGradient)" transform="rotate(90)"/>
+        <ellipse cx="0" cy="-40" rx="8" ry="25" fill="url(#petalGradient)" transform="rotate(105)"/>
+        <ellipse cx="0" cy="-40" rx="8" ry="25" fill="url(#petalGradient)" transform="rotate(120)"/>
+        <ellipse cx="0" cy="-40" rx="8" ry="25" fill="url(#petalGradient)" transform="rotate(135)"/>
+        <ellipse cx="0" cy="-40" rx="8" ry="25" fill="url(#petalGradient)" transform="rotate(150)"/>
+        <ellipse cx="0" cy="-40" rx="8" ry="25" fill="url(#petalGradient)" transform="rotate(165)"/>
+        <ellipse cx="0" cy="-40" rx="8" ry="25" fill="url(#petalGradient)" transform="rotate(180)"/>
+        <ellipse cx="0" cy="-40" rx="8" ry="25" fill="url(#petalGradient)" transform="rotate(195)"/>
+        <ellipse cx="0" cy="-40" rx="8" ry="25" fill="url(#petalGradient)" transform="rotate(210)"/>
+        <ellipse cx="0" cy="-40" rx="8" ry="25" fill="url(#petalGradient)" transform="rotate(225)"/>
+        <ellipse cx="0" cy="-40" rx="8" ry="25" fill="url(#petalGradient)" transform="rotate(240)"/>
+        <ellipse cx="0" cy="-40" rx="8" ry="25" fill="url(#petalGradient)" transform="rotate(255)"/>
+        <ellipse cx="0" cy="-40" rx="8" ry="25" fill="url(#petalGradient)" transform="rotate(270)"/>
+        <ellipse cx="0" cy="-40" rx="8" ry="25" fill="url(#petalGradient)" transform="rotate(285)"/>
+        <ellipse cx="0" cy="-40" rx="8" ry="25" fill="url(#petalGradient)" transform="rotate(300)"/>
+        <ellipse cx="0" cy="-40" rx="8" ry="25" fill="url(#petalGradient)" transform="rotate(315)"/>
+        <ellipse cx="0" cy="-40" rx="8" ry="25" fill="url(#petalGradient)" transform="rotate(330)"/>
+        <ellipse cx="0" cy="-40" rx="8" ry="25" fill="url(#petalGradient)" transform="rotate(345)"/>
+    </g>
+    
+    <!-- 菊花花瓣 - 内层 -->
+    <g>
+        <ellipse cx="0" cy="-30" rx="6" ry="18" fill="#ffdd44" transform="rotate(7.5)"/>
+        <ellipse cx="0" cy="-30" rx="6" ry="18" fill="#ffdd44" transform="rotate(22.5)"/>
+        <ellipse cx="0" cy="-30" rx="6" ry="18" fill="#ffdd44" transform="rotate(37.5)"/>
+        <ellipse cx="0" cy="-30" rx="6" ry="18" fill="#ffdd44" transform="rotate(52.5)"/>
+        <ellipse cx="0" cy="-30" rx="6" ry="18" fill="#ffdd44" transform="rotate(67.5)"/>
+        <ellipse cx="0" cy="-30" rx="6" ry="18" fill="#ffdd44" transform="rotate(82.5)"/>
+        <ellipse cx="0" cy="-30" rx="6" ry="18" fill="#ffdd44" transform="rotate(97.5)"/>
+        <ellipse cx="0" cy="-30" rx="6" ry="18" fill="#ffdd44" transform="rotate(112.5)"/>
+        <ellipse cx="0" cy="-30" rx="6" ry="18" fill="#ffdd44" transform="rotate(127.5)"/>
+        <ellipse cx="0" cy="-30" rx="6" ry="18" fill="#ffdd44" transform="rotate(142.5)"/>
+        <ellipse cx="0" cy="-30" rx="6" ry="18" fill="#ffdd44" transform="rotate(157.5)"/>
+        <ellipse cx="0" cy="-30" rx="6" ry="18" fill="#ffdd44" transform="rotate(172.5)"/>
+        <ellipse cx="0" cy="-30" rx="6" ry="18" fill="#ffdd44" transform="rotate(187.5)"/>
+        <ellipse cx="0" cy="-30" rx="6" ry="18" fill="#ffdd44" transform="rotate(202.5)"/>
+        <ellipse cx="0" cy="-30" rx="6" ry="18" fill="#ffdd44" transform="rotate(217.5)"/>
+        <ellipse cx="0" cy="-30" rx="6" ry="18" fill="#ffdd44" transform="rotate(232.5)"/>
+        <ellipse cx="0" cy="-30" rx="6" ry="18" fill="#ffdd44" transform="rotate(247.5)"/>
+        <ellipse cx="0" cy="-30" rx="6" ry="18" fill="#ffdd44" transform="rotate(262.5)"/>
+        <ellipse cx="0" cy="-30" rx="6" ry="18" fill="#ffdd44" transform="rotate(277.5)"/>
+        <ellipse cx="0" cy="-30" rx="6" ry="18" fill="#ffdd44" transform="rotate(292.5)"/>
+        <ellipse cx="0" cy="-30" rx="6" ry="18" fill="#ffdd44" transform="rotate(307.5)"/>
+        <ellipse cx="0" cy="-30" rx="6" ry="18" fill="#ffdd44" transform="rotate(322.5)"/>
+        <ellipse cx="0" cy="-30" rx="6" ry="18" fill="#ffdd44" transform="rotate(337.5)"/>
+        <ellipse cx="0" cy="-30" rx="6" ry="18" fill="#ffdd44" transform="rotate(352.5)"/>
+    </g>
+    
+    <!-- 菊花叶子 -->
+    <path d="M-60,20 Q-80,30 -70,50 Q-60,60 -40,50 Q-30,40 -40,25 Z" fill="#228B22"/>
+    <path d="M60,20 Q80,30 70,50 Q60,60 40,50 Q30,40 40,25 Z" fill="#228B22"/>
+    <path d="M-30,70 Q-40,90 -20,95 Q0,90 -10,75 Z" fill="#228B22"/>
+    <path d="M30,70 Q40,90 20,95 Q0,90 10,75 Z" fill="#228B22"/>
+</g>
+
+<!-- 左侧菊花装饰 -->
+<g transform="translate(100, 500) scale(0.6)">
+    <circle cx="0" cy="0" r="20" fill="#ff6600"/>
+    <circle cx="0" cy="0" r="12" fill="#ffcc00"/>
+    
+    <!-- 花瓣 -->
+    <ellipse cx="0" cy="-25" rx="5" ry="15" fill="url(#petalGradient)" transform="rotate(0)"/>
+    <ellipse cx="0" cy="-25" rx="5" ry="15" fill="url(#petalGradient)" transform="rotate(30)"/>
+    <ellipse cx="0" cy="-25" rx="5" ry="15" fill="url(#petalGradient)" transform="rotate(60)"/>
+    <ellipse cx="0" cy="-25" rx="5" ry="15" fill="url(#petalGradient)" transform="rotate(90)"/>
+    <ellipse cx="0" cy="-25" rx="5" ry="15" fill="url(#petalGradient)" transform="rotate(120)"/>
+    <ellipse cx="0" cy="-25" rx="5" ry="15" fill="url(#petalGradient)" transform="rotate(150)"/>
+    <ellipse cx="0" cy="-25" rx="5" ry="15" fill="url(#petalGradient)" transform="rotate(180)"/>
+    <ellipse cx="0" cy="-25" rx="5" ry="15" fill="url(#petalGradient)" transform="rotate(210)"/>
+    <ellipse cx="0" cy="-25" rx="5" ry="15" fill="url(#petalGradient)" transform="rotate(240)"/>
+    <ellipse cx="0" cy="-25" rx="5" ry="15" fill="url(#petalGradient)" transform="rotate(270)"/>
+    <ellipse cx="0" cy="-25" rx="5" ry="15" fill="url(#petalGradient)" transform="rotate(300)"/>
+    <ellipse cx="0" cy="-25" rx="5" ry="15" fill="url(#petalGradient)" transform="rotate(330)"/>
+</g>
+
+<!-- 右侧菊花装饰 -->
+<g transform="translate(500, 380) scale(0.5)">
+    <circle cx="0" cy="0" r="18" fill="#ff6600"/>
+    <circle cx="0" cy="0" r="10" fill="#ffcc00"/>
+    
+    <!-- 花瓣 -->
+    <ellipse cx="0" cy="-22" rx="4" ry="12" fill="url(#petalGradient)" transform="rotate(0)"/>
+    <ellipse cx="0" cy="-22" rx="4" ry="12" fill="url(#petalGradient)" transform="rotate(45)"/>
+    <ellipse cx="0" cy="-22" rx="4" ry="12" fill="url(#petalGradient)" transform="rotate(90)"/>
+    <ellipse cx="0" cy="-22" rx="4" ry="12" fill="url(#petalGradient)" transform="rotate(135)"/>
+    <ellipse cx="0" cy="-22" rx="4" ry="12" fill="url(#petalGradient)" transform="rotate(180)"/>
+    <ellipse cx="0" cy="-22" rx="4" ry="12" fill="url(#petalGradient)" transform="rotate(225)"/>
+    <ellipse cx="0" cy="-22" rx="4" ry="12" fill="url(#petalGradient)" transform="rotate(270)"/>
+    <ellipse cx="0" cy="-22" rx="4" ry="12" fill="url(#petalGradient)" transform="rotate(315)"/>
+</g>
+
+<!-- 装饰圆点 -->
+<circle cx="120" cy="200" r="4" fill="#4a90e2"/>
+<circle cx="480" cy="250" r="3" fill="#4a90e2"/>
+<circle cx="150" cy="400" r="2" fill="#ffcc00"/>
+<circle cx="450" cy="600" r="3" fill="#ffcc00"/>
+
+</svg>
