@@ -55,14 +55,19 @@ export class ImageGenerator {
       // 在生产环境中需要添加base路径前缀
       const basePath = import.meta.env.PROD ? '/vehicle-pass-generator/' : '/'
       const imagePath = basePath + 'vehicle-pass-template.jpg'
-      img.src = imagePath
-      console.log('设置图片路径:', img.src)
+      
+      console.log('设置图片路径:', imagePath)
       console.log('加载public目录中的JPG格式底图文件')
       console.log('当前环境:', import.meta.env.PROD ? '生产环境' : '开发环境')
       console.log('Base路径:', basePath)
       
-      // 添加跨域支持
-      img.crossOrigin = 'anonymous'
+      // 在生产环境中，由于是同源请求，不需要设置crossOrigin
+      // 只在开发环境或跨域情况下设置
+      if (!import.meta.env.PROD) {
+        img.crossOrigin = 'anonymous'
+      }
+      
+      img.src = imagePath
       
       // 设置超时处理
       setTimeout(() => {
