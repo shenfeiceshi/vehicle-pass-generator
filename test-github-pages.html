@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Pages 图片生成测试</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .result {
+            margin: 10px 0;
+            padding: 10px;
+            background: #f5f5f5;
+            border-radius: 4px;
+        }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        canvas {
+            border: 1px solid #ccc;
+            margin: 10px 0;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 4px;
+            background: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>GitHub Pages 图片生成功能测试</h1>
+    
+    <div class="test-section">
+        <h2>1. 图片资源加载测试</h2>
+        <button onclick="testImageLoad()">测试图片加载</button>
+        <div id="imageLoadResult" class="result"></div>
+        <img id="testImage" style="max-width: 300px; display: none;" />
+    </div>
+    
+    <div class="test-section">
+        <h2>2. Canvas 图片生成测试</h2>
+        <button onclick="testCanvasGeneration()">测试Canvas生成</button>
+        <div id="canvasResult" class="result"></div>
+        <canvas id="testCanvas" width="400" height="300" style="display: none;"></canvas>
+    </div>
+    
+    <div class="test-section">
+        <h2>3. 完整通行证生成测试</h2>
+        <input type="text" id="licensePlate" placeholder="输入车牌号" value="京A12345" />
+        <button onclick="testFullGeneration()">生成通行证</button>
+        <div id="fullResult" class="result"></div>
+        <canvas id="permitCanvas" width="800" height="600" style="display: none;"></canvas>
+        <div id="downloadSection" style="display: none;">
+            <button onclick="downloadImage()">下载图片</button>
+        </div>
+    </div>
+
+    <script>
+        // 获取正确的图片路径
+        function getImagePath() {
+            const isGitHubPages = window.location.hostname === 'shenfeiceshi.github.io';
+            const basePath = isGitHubPages ? '/vehicle-pass-generator/' : '/';
+            return basePath + '车辆通行证_画板 1.jpg';
+        }
+
+        // 测试图片加载
+        function testImageLoad() {
+            const resultDiv = document.getElementById('imageLoadResult');
+            const testImg = document.getElementById('testImage');
+            
+            resultDiv.textContent = '正在测试图片加载...';
+            resultDiv.className = 'result';
+            
+            const img = new Image();
+            const imagePath = getImagePath();
+            
+            img.onload = function() {
+                resultDiv.textContent = `✅ 图片加载成功！尺寸: ${img.width}x${img.height}`;
+                resultDiv.className = 'result success';
+                testImg.src = imagePath;
+                testImg.style.display = 'block';
+            };
+            
+            img.onerror = function() {
+                resultDiv.textContent = `❌ 图片加载失败！路径: ${imagePath}`;
+                resultDiv.className = 'result error';
+            };
+            
+            img.crossOrigin = 'anonymous';
+            img.src = encodeURI(imagePath);
+        }
+
+        // 测试Canvas生成
+        function testCanvasGeneration() {
+            const resultDiv = document.getElementById('canvasResult');
+            const canvas = document.getElementById('testCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            resultDiv.textContent = '正在测试Canvas生成...';
+            resultDiv.className = 'result';
+            
+            const img = new Image();
+            const imagePath = getImagePath();
+            
+            img.onload = function() {
+                try {
+                    // 清空画布
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    
+                    // 绘制图片
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    
+                    // 添加测试文字
+                    ctx.fillStyle = '#000000';
+                    ctx.font = 'bold 24px Arial';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('测试文字', canvas.width / 2, canvas.height / 2);
+                    
+                    // 验证Canvas内容
+                    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                    const hasContent = imageData.data.some(pixel => pixel !== 0);
+                    
+                    if (hasContent) {
+                        resultDiv.textContent = '✅ Canvas生成成功！';
+                        resultDiv.className = 'result success';
+                        canvas.style.display = 'block';
+                    } else {
+                        resultDiv.textContent = '❌ Canvas生成失败：无内容';
+                        resultDiv.className = 'result error';
+                    }
+                } catch (error) {
+                    resultDiv.textContent = `❌ Canvas生成失败：${error.message}`;
+                    resultDiv.className = 'result error';
+                }
+            };
+            
+            img.onerror = function() {
+                resultDiv.textContent = `❌ 图片加载失败，无法测试Canvas`;
+                resultDiv.className = 'result error';
+            };
+            
+            img.crossOrigin = 'anonymous';
+            img.src = encodeURI(imagePath);
+        }
+
+        // 测试完整通行证生成
+        function testFullGeneration() {
+            const resultDiv = document.getElementById('fullResult');
+            const canvas = document.getElementById('permitCanvas');
+            const ctx = canvas.getContext('2d');
+            const licensePlate = document.getElementById('licensePlate').value;
+            const downloadSection = document.getElementById('downloadSection');
+            
+            resultDiv.textContent = '正在生成通行证...';
+            resultDiv.className = 'result';
+            
+            const img = new Image();
+            const imagePath = getImagePath();
+            
+            img.onload = function() {
+                try {
+                    // 清空画布
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    
+                    // 绘制底图
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    
+                    // 绘制车牌号
+                    ctx.fillStyle = '#000000';
+                    ctx.font = 'bold 48px "Microsoft YaHei", Arial, sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    
+                    // 添加阴影效果
+                    ctx.shadowColor = 'rgba(255, 255, 255, 0.8)';
+                    ctx.shadowBlur = 2;
+                    ctx.shadowOffsetX = 1;
+                    ctx.shadowOffsetY = 1;
+                    
+                    // 绘制车牌号在合适位置
+                    const textX = canvas.width / 2;
+                    const textY = canvas.height * 0.47;
+                    ctx.fillText(licensePlate, textX, textY);
+                    
+                    // 清除阴影
+                    ctx.shadowColor = 'transparent';
+                    ctx.shadowBlur = 0;
+                    ctx.shadowOffsetX = 0;
+                    ctx.shadowOffsetY = 0;
+                    
+                    // 验证生成结果
+                    const dataUrl = canvas.toDataURL('image/png');
+                    if (dataUrl && dataUrl.length > 1000) {
+                        resultDiv.textContent = `✅ 通行证生成成功！车牌号：${licensePlate}`;
+                        resultDiv.className = 'result success';
+                        canvas.style.display = 'block';
+                        downloadSection.style.display = 'block';
+                        window.generatedDataUrl = dataUrl;
+                    } else {
+                        resultDiv.textContent = '❌ 通行证生成失败：数据无效';
+                        resultDiv.className = 'result error';
+                    }
+                } catch (error) {
+                    resultDiv.textContent = `❌ 通行证生成失败：${error.message}`;
+                    resultDiv.className = 'result error';
+                }
+            };
+            
+            img.onerror = function() {
+                resultDiv.textContent = `❌ 底图加载失败，无法生成通行证`;
+                resultDiv.className = 'result error';
+            };
+            
+            img.crossOrigin = 'anonymous';
+            img.src = encodeURI(imagePath);
+        }
+
+        // 下载图片
+        function downloadImage() {
+            if (window.generatedDataUrl) {
+                const link = document.createElement('a');
+                link.download = `车辆通行证_${document.getElementById('licensePlate').value}.png`;
+                link.href = window.generatedDataUrl;
+                link.click();
+            }
+        }
+
+        // 页面加载完成后显示环境信息
+        window.onload = function() {
+            const isGitHubPages = window.location.hostname === 'shenfeiceshi.github.io';
+            const envInfo = document.createElement('div');
+            envInfo.className = 'test-section';
+            envInfo.innerHTML = `
+                <h2>环境信息</h2>
+                <p><strong>当前域名:</strong> ${window.location.hostname}</p>
+                <p><strong>是否GitHub Pages:</strong> ${isGitHubPages ? '是' : '否'}</p>
+                <p><strong>图片路径:</strong> ${getImagePath()}</p>
+                <p><strong>完整图片URL:</strong> ${window.location.origin + getImagePath()}</p>
+            `;
+            document.body.insertBefore(envInfo, document.body.firstChild.nextSibling);
+        };
+    </script>
+</body>
+</html>
